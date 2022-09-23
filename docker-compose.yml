@@ -10,6 +10,7 @@ services:
       Masterauth: $Masterauth
     volumes:
     - ./redis.conf:/usr/local/etc/redis/redis.conf
+    - ./data/redis-node1/data:/data
     ports: 
       - 7000:7000 
       - 17000:17000 
@@ -23,6 +24,7 @@ services:
       Masterauth: $Masterauth
     volumes:
     - ./redis.conf:/usr/local/etc/redis/redis.conf
+    - ./data/redis-node2/data:/data
     ports: 
       - 7001:7001 
       - 17001:17001 
@@ -36,6 +38,7 @@ services:
       Masterauth: $Masterauth
     volumes:
     - ./redis.conf:/usr/local/etc/redis/redis.conf
+    - ./data/redis-node3/data:/data
     ports: 
       - 7002:7002 
       - 17002:17002 
@@ -49,6 +52,7 @@ services:
       Masterauth: $Masterauth
     volumes:
     - ./redis.conf:/usr/local/etc/redis/redis.conf
+    - ./data/redis-node4/data:/data
     ports: 
       - 7003:7003 
       - 17003:17003 
@@ -62,6 +66,7 @@ services:
       Masterauth: $Masterauth
     volumes:
     - ./redis.conf:/usr/local/etc/redis/redis.conf
+    - ./data/redis-node5/data:/data
     ports: 
       - 7004:7004 
       - 17004:17004 
@@ -75,6 +80,7 @@ services:
       Masterauth: $Masterauth
     volumes:
     - ./redis.conf:/usr/local/etc/redis/redis.conf
+    - ./data/redis-node6/data:/data
     ports: 
       - 7005:7005 
       - 17005:17005 
