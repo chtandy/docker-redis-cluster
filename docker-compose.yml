@@ -1,3 +1,5 @@
+# masterauth作用：主要是針對master對應的slave節點設置的，在slave節點數據同步的時候用到。
+# requirepass作用：對登錄權限做限制，redis每個節點的requirepass可以是獨立、不同的。
 version: '3.4'
 services:
   redis-node1:
@@ -84,7 +86,7 @@ services:
       ip: $ip
       Requirepass: $Requirepass
       Masterauth: $Masterauth
-    entrypoint: [/bin/sh,-c,'echo "yes" | redis-cli -a ${Masterauth} --cluster create ${ip}:7000 ${ip}:7001 ${ip}:7002 ${ip}:7003 ${ip}:7004 ${ip}:7005 --cluster-replicas 1']
+    entrypoint: [/bin/sh,-c,'echo "yes" | redis-cli -a ${Requirepass} --cluster create ${ip}:7000 ${ip}:7001 ${ip}:7002 ${ip}:7003 ${ip}:7004 ${ip}:7005 --cluster-replicas 1']
     depends_on: 
       - redis-node1 
       - redis-node2
