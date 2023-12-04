@@ -1,5 +1,6 @@
 # masterauth作用：主要是針對master對應的slave節點設置的，在slave節點數據同步的時候用到。
 # requirepass作用：對登錄權限做限制，redis每個節點的requirepass可以是獨立、不同的。
+# 每個 redis node 都需要開放兩個 TCP port：一個是 redis client 連線使用的 port (常見為 6379) 另一個是 cluster bus 用來做 node 間的交互溝通 (固定為 client port 加上 10000)
 version: '3.4'
 services:
   redis-node1:
@@ -100,3 +101,27 @@ services:
       - redis-node4
       - redis-node5 
       - redis-node6
+
+  init-data:
+    image: busybox
+    volumes:
+      - ./data/redisinsight:/data
+    command: ["sh", "-c", "chown 1001:1001 /data"]
+    restart: 'no'
+    depends_on:
+      - redis-cluster-creator
+
+  redisinsight:
+    image: redislabs/redisinsight:1.14.0
+    volumes:
+    - ./data/redisinsight:/db
+    ports:
+      - 8001:8001
+    depends_on:
+      - init-data
+
+
+
+
+
+
